@@ -27,12 +27,10 @@ Page({
       }
     })
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  handleGoSectionContent: function () {
+    console.log('跳转路由')
+    wx.navigateTo({
+      url: '../catalog/catalog',
     })
   }
 })

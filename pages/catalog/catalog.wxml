@@ -1,0 +1,4 @@
+<!--pages/catalog/catalog.wxml-->
+<view>
+  <text>小说详情</text>
+</view>

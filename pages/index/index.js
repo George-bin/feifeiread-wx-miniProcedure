@@ -18,7 +18,7 @@ Page({
   },
   onLoad: function () {
     wx.request({
-      url: 'http://39.105.55.137/api/book/catalog/42',
+      url: 'http://localhost:3000/api/book/catalog/41',
       success: (response) => {
         console.log(response.data)
         this.setData({
@@ -29,8 +29,11 @@ Page({
   },
   handleGoSectionContent: function () {
     console.log('跳转路由')
-    wx.navigateTo({
-      url: '../catalog/catalog',
+    // wx.navigateTo({
+    //   url: '../catalog/catalog',
+    // })
+    wx.switchTab({
+      url: '../catalog/catalog'
     })
   }
 })

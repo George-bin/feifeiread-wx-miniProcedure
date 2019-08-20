@@ -1,0 +1,65 @@
+.section-content-container {
+  height: calc(100vh);
+  /* padding-bottom: 30px; */
+  background: #F2F2F2
+}
+
+.section-content-container scroll-view {
+  height: calc(100vh - 30px);
+}
+
+.section-content-container .content-section {
+  padding: 10px 15px 30px;
+  font-size: 15px;
+}
+
+.section-content-container .footer-section {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 30px);
+  height: 30px;
+  padding: 0 15px;
+  line-height: 30px;
+  font-size: 12px;
+  color: #333333;
+}
+
+.section-content-container .footer-section text {
+  flex: 1;
+}
+
+.section-content-container .footer-section .next-section-btn {
+  flex: 2;
+  text-align: center;
+  font-size: 16px;
+  color: #b6481c;
+}
+
+.section-content-container .footer-section .book-name {
+  text-align: right;
+}
+
+/* 设置 */
+.set-up-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  color: white;
+  background: black;
+  transition: 0.5s all;
+}
+
+.set-up-section .set-up-item {
+  flex: 1;
+  text-align: center;
+}
+
+.set-up-section .set-up-item .iconfont {
+  font-size: 22px;
+}

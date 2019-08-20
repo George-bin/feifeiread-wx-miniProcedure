@@ -1,8 +1,44 @@
 <!--index.wxml-->
-<view class="container">
-  <view wx:for="{{catalogList}}">
-    <view bindtap="handleGoSectionContent">
-      <text>{{item.title}}</text>
+<view class="home-container">
+  
+  <!-- 所有分类列表 start -->
+  <view class="classify-list">
+    <view
+      class="classify-list-item"
+      wx:for="{{classifyList}}"
+      wx:for-item="classify"
+      wx:key="{{classify.classifyName}}">
+      <view
+        class="classify-title"
+        style="padding-left: {{(systemWidth-3*120) / 4 + 'px'}}; padding-right: {{(systemWidth-3*120) / 4 + 'px'}}">
+        <text class="title">{{classify.classifyName}}</text>
+        <text class="more">更多</text>
+      </view>
+      <view
+        class="classify-book-list"
+        style="padding-left: {{(systemWidth-3*120) / 4 + 'px'}}; padding-right: {{(systemWidth-3*120) / 4 + 'px'}}">
+        <view
+          wx:for="{{classify.bookList}}"
+          wx:for-item="book"
+          wx:key="{{book._id}}"
+          bindtap="handleGoSectionContent"
+          data-book="{{book}}"
+          class="book-list-item">
+            <view class="book-cover"><image mode="scaleToFill" src="{{book.bookCover}}"></image></view>
+            <view class="book-name"><text class="value">{{book.bookName}}</text></view>
+            <!-- 评分 -->
+            <view class="book-gradw">
+              <text
+                wx:for="{{5}}"
+                wx:key="{{item}}"
+                class="iconfont icon-xingxing"
+                style="color: {{index + 1 < book.grade/2 ? '#f4ea2a' : 'gray'}}">
+              </text>
+              <text style="font-size: 12px; margin-left: 5px;">{{book.grade}}</text>
+            </view>
+        </view>
+      </view>
     </view>
   </view>
+  <!-- 所有分类列表 end -->
 </view>

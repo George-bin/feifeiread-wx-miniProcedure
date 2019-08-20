@@ -8,32 +8,59 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    catalogList: []
+    // 分类列表
+    classifyList: [],
+    // classify: {},
+    systemWidth: 0
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
-    })
+    });
   },
   onLoad: function () {
+    this.init();
+    this.getBookList();
+  },
+
+  init: function () {
+    this.setData({
+      systemWidth: app.globalData.windowWidth
+    });
+  },
+
+  handleGoSectionContent: function (e) {
+    console.log('跳转路由')
+    let { book } = e.currentTarget.dataset;
+    app.globalData.activeBookInfo = JSON.parse(JSON.stringify(book));
+    wx.navigateTo({
+      url: '../bookInfo/bookInfo',
+    });
+  },
+
+  // 获取小说列表
+  getBookList: function () {
+    wx.showLoading({
+      title: '数据加载中...',
+    });
     wx.request({
-      url: 'http://localhost:3000/api/book/catalog/41',
+      url: `${app.globalData.BASE_URL}/api/book/list?classify=推理悬疑`,
       success: (response) => {
-        console.log(response.data)
+        // console.log(response.data);
         this.setData({
-          catalogList: response.data.catalogData
+          classifyList: response.data.classifyList
+        });
+        wx.hideLoading();
+      },
+      fail: (err) => {
+        console.error(err);
+        wx.hideLoading();
+        wx.showToast({
+          title: '数据加载失败!',
+          icon: 'none'
         })
       }
-    })
-  },
-  handleGoSectionContent: function () {
-    console.log('跳转路由')
-    // wx.navigateTo({
-    //   url: '../catalog/catalog',
-    // })
-    wx.switchTab({
-      url: '../catalog/catalog'
     })
   }
 })

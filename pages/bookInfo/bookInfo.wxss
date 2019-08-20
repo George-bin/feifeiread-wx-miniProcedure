@@ -1,0 +1,111 @@
+.bookinfo-container {
+  font-size: 16px;
+}
+
+/* 基本信息 */
+.bookinfo-container .book-base-info {
+  display: flex;
+  /* justify-content: space-between; */
+  padding: 10px 16px 16px 16px;
+  background: #4bb8c5;
+}
+
+.book-base-info .base-info {
+  flex: 1;
+  font-size: 14px;
+}
+
+.book-base-info .base-info .base-info-item + .base-info-item {
+  margin-top: 4px;
+}
+
+.book-base-info .base-info .label {
+  display: none;
+}
+
+.book-base-info .base-info .book-name {
+  font-size: 22px;
+  color: white;
+}
+
+.book-base-info .base-info .book-author {
+  /* color: #6792ac; */
+  color: #b6481c;
+}
+
+.book-base-info .base-info .book-label, .book-base-info .base-info .book-section-count {
+  color: #f7f7f7;
+}
+
+.book-base-info .base-info .book-label .value + .value::before {
+  content: " | "
+}
+
+.book-base-info .book-cover {
+  margin-top: 38px;
+}
+
+.book-base-info .book-cover image {
+  width: 120px;
+  height: 150px;
+}
+
+/* 简介 */
+.bookinfo-container .book-intro {
+  padding: 0 16px 10px 16px;
+  margin-top: 20px;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+.bookinfo-container .book-intro .label {
+  color: gray;
+}
+
+.bookinfo-container .book-intro .value {
+  margin-top: 10px;
+}
+
+
+/* 评分/点赞 */
+.bookinfo-container .user-handle {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-top: 20px;
+}
+
+.bookinfo-container .user-handle .user-handle-item {
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #4bb8c5;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  color: #4bb8c5;
+}
+
+
+/* 阅读 */
+.bookinfo-container .start-read-section {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.bookinfo-container .start-read-section .start-read-btn, .bookinfo-container .start-read-section .no-content-btn {
+  width: 200px;
+  height: 34px;
+  line-height: 34px;
+  border: 0;
+  font-size: 16px;
+  color: white;
+  background: #4bb8c5;
+  border-radius: 30px;
+}
+
+.bookinfo-container .start-read-section .no-content-btn {
+  background: #c4c4c4;
+}

@@ -1,21 +1,47 @@
-/**index.wxss**/
-.userinfo {
+.classify-list .classify-list-item + .classify-list-item {
+  margin-top: 10px;
+}
+
+.classify-list .classify-list-item .classify-title {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+}
+
+.classify-list-item .classify-title .title {
+  font-size: 18px;
+  /* font-weight: bold; */
+}
+
+.classify-list-item .classify-title .more {
+  color: #4bb8c5;
+}
+
+.home-container .classify-book-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-container .book-list-item {
+  display: inline-block;
+}
+
+.home-container .book-list-item image {
+  width: 120px;
+  height: 150px;
+  border-radius: 4px;
+}
+
+.home-container .book-list-item .book-name {
+  font-size: 14px;
+  text-align: center;
+}
+
+.home-container .book-list-item .book-gradw {
+  display: flex;
+  justify-content: center;
   align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
+  color: gray;
 }

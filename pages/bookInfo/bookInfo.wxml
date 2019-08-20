@@ -1,0 +1,65 @@
+<view class="bookinfo-container">
+  <!-- 基本信息 -->
+  <view class="book-base-info">
+    <!-- 基本信息 -->
+    <view class="base-info">
+      <view class="book-name base-info-item">
+        <text class="label">书名:</text>
+        <text class="value">{{bookInfo.bookName}}</text>
+      </view>
+
+      <!-- 评分 -->
+      <view class="book-gradw base-info-item">
+        <text
+          wx:for="{{5}}"
+          wx:key="{{item}}"
+          class="iconfont icon-xingxing"
+          style="color: {{index + 1 < bookInfo.grade/2 ? '#f4ea2a' : 'gray'}}">
+        </text>
+        <text style="font-size: 12px; margin-left: 5px; color: white">{{bookInfo.grade}}</text>
+      </view>
+
+      <view class="book-author base-info-item">
+        <text class="label">作者:</text>
+        <text class="value">{{bookInfo.author}}(作者)</text>
+      </view>
+
+      <view class="book-label base-info-item">
+        <text class="label">标签:</text>
+        <text wx:for="{{bookInfo.label}}" wx:key="{{item}}" class="value">{{item}}</text>
+      </view>
+
+      <view class="book-section-count base-info-item">
+        <text class="label">章节:</text>
+        <text class="value">共{{bookInfo.sectionCount}}章</text>
+      </view>
+    </view>
+    <!-- 封面 -->
+    <view class="book-cover">
+      <image mode="widthFix" src="{{bookInfo.bookCover}}"></image>
+    </view>
+  </view>
+  <!-- 想看/评分 -->
+  <view class="user-handle">
+    <view class="user-handle-item" style="width: {{(systemWidth-16*3)/2+'px'}};">点赞</view>
+    <view class="user-handle-item" style="width: {{(systemWidth-16*3)/2+'px'}};">评分</view>
+  </view>
+  <!-- 简介 -->
+  <view class="book-intro">
+    <view class="label"><text>{{bookInfo.bookName}}的内容简介</text></view>
+    <view class="value"><text>{{bookInfo.bookIntro}}</text></view>
+  </view>
+  <!-- 阅读 -->
+  <view class="start-read-section">
+    <button
+      wx:if="{{catalogData.length || loading}}"
+      class="start-read-btn"
+      bindtap="handleStartRead"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+      style="background: {{loading ? 'gray' : '#4bb8c5'}}">
+      免费阅读
+    </button>
+    <button wx:else class="no-content-btn">暂无数据!</button>
+  </view>
+</view>

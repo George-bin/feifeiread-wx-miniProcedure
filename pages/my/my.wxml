@@ -1,0 +1,4 @@
+<view>
+  <text></text>
+  <button bindtap="handleLogin">登录</button>
+</view>

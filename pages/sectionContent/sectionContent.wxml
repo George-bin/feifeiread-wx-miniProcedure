@@ -1,0 +1,45 @@
+ <view
+  class="section-content-container"
+  style="background: {{readPattern === 'daytime' ? '#f2f2f2' : '#333333'}}; color: {{readPattern === 'daytime' ? 'black' : '#dfdfdf'}}">
+  <scroll-view
+    scroll-y
+    bindscrolltolower="onScrolltolower"
+    bindscrolltoupper="onScrolltoupper"
+    lower-threshold="{{0}}"
+    upper-threshold="{{0}}"
+    scroll-into-view="{{toView}}"
+    scroll-top="20px">
+    <view style="height: 20px;"></view>
+    <view id="top"></view>
+    <view
+      class="content-section"
+      bindlongpress="handleActiveSetUp"
+      bindtap="handleCloseSetUp"
+      style="">
+      <text class="value">{{section.content}}</text>
+    </view>
+  </scroll-view>
+
+  <!-- 页脚 start -->
+  <view class="footer-section">
+    <text class="section-name ellipsis" style="color: {{readPattern === 'daytime' ? '#333333' : 'gray'}}">{{section.title}}</text>
+    <text class="next-section-btn" bindtap="onScrolltolower">下一章</text>
+    <text class="book-name" style="color: {{readPattern === 'daytime' ? '#333333' : 'gray'}}">{{section.bookName}}</text>
+  </view>
+  <!-- 页脚 start -->
+
+  <!-- 设置 start -->
+  <view
+    class="set-up-section"
+    style="transform: {{openSet ? 'translateY(0)' : 'translateY(40px)'}}">
+    <view class="set-up-item">
+      <text class="iconfont icon-liebiao"></text>
+    </view>
+    <view class="set-up-item">
+      <!-- wx:if="{{readPattern === 'daytime'}}" -->
+      <text class="iconfont icon-icon_baitian" bindtap="handleSwitchReadPattern"></text>
+      <!-- <text wx:else class="iconfont icon-lkingboyewanyueliang" bindtap="handleSwitchReadPattern"></text> -->
+    </view>
+  </view>
+  <!-- 设置 end -->
+ </view>

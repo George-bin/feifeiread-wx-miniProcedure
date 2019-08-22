@@ -1,10 +1,9 @@
 .section-content-container {
-  height: calc(100vh);
-  /* padding-bottom: 30px; */
+  height: 100vh;
   background: #F2F2F2
 }
 
-.section-content-container scroll-view {
+.section-content-container .content-section-scroll-view {
   height: calc(100vh - 30px);
 }
 
@@ -52,7 +51,7 @@
   height: 40px;
   color: white;
   background: black;
-  transition: 0.5s all;
+  transition: 0.3s all;
 }
 
 .set-up-section .set-up-item {
@@ -62,4 +61,35 @@
 
 .set-up-section .set-up-item .iconfont {
   font-size: 22px;
+}
+
+/* 目录 */
+.catalog-section {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  transition: 0.3s all;
+  background: none;
+  /* z-index: 9990; */
+}
+
+.catalog-section scroll-view {
+  width: 70%;
+  height: 100vh;
+  background: black;
+}
+
+.catalog-section scroll-view view {
+  height: 34px;
+  line-height: 34px;
+  padding: 0 20px;
+  font-size: 15px;
+  color: white;
+}
+.catalog-section scroll-view .more-data {
+  /* text-align: center; */
+  color: rgba(182, 72, 28, 0.5);
 }

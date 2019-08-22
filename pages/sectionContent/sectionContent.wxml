@@ -1,14 +1,15 @@
  <view
   class="section-content-container"
   style="background: {{readPattern === 'daytime' ? '#f2f2f2' : '#333333'}}; color: {{readPattern === 'daytime' ? 'black' : '#dfdfdf'}}">
+  <!-- bindscrolltolower="onScrolltolower" -->
   <scroll-view
     scroll-y
-    bindscrolltolower="onScrolltolower"
     bindscrolltoupper="onScrolltoupper"
     lower-threshold="{{0}}"
     upper-threshold="{{0}}"
     scroll-into-view="{{toView}}"
-    scroll-top="20px">
+    scroll-top="20px"
+    class="content-section-scroll-view">
     <view style="height: 20px;"></view>
     <view id="top"></view>
     <view
@@ -32,14 +33,44 @@
   <view
     class="set-up-section"
     style="transform: {{openSet ? 'translateY(0)' : 'translateY(40px)'}}">
-    <view class="set-up-item">
+    <view class="set-up-item" bindtap="handleOpenCatalog">
       <text class="iconfont icon-liebiao"></text>
     </view>
-    <view class="set-up-item">
+    <view class="set-up-item" bindtap="handleSwitchReadPattern">
       <!-- wx:if="{{readPattern === 'daytime'}}" -->
       <text class="iconfont icon-icon_baitian" bindtap="handleSwitchReadPattern"></text>
       <!-- <text wx:else class="iconfont icon-lkingboyewanyueliang" bindtap="handleSwitchReadPattern"></text> -->
     </view>
   </view>
   <!-- 设置 end -->
+
+  <!-- 目录 start -->
+  <view
+    class="catalog-section"
+    style="transform: {{openCatalog ? 'translateX(0)' : 'translateX(-100%)'}};"
+    bindtap="handleCloseCatalog">
+    <scroll-view
+      scroll-y
+      lower-threshold="{{0}}"
+      upper-threshold="{{0}}"
+      scroll-into-view="{{toCatalogView}}"
+      bindscrolltoupper="onScrollCatalogtoupper"
+      style="background: {{readPattern === 'daytime' ? 'white' : 'black'}}">
+      <view style="height: 20px;"></view>
+      <view id="catalog-top" style="height: 0;"></view>
+      <view
+        wx:for="{{catalogData}}"
+        wx:for-item="catalog"
+        wx:key="{{section._id}}"
+        id="{{'catalog-'+catalog.sectionId}}"
+        class="ellipsis"
+        catchtap="handleGetSectionBySectionId"
+        data-sectionid="{{catalog.sectionId}}"
+        style="color:{{readPattern === 'daytime' ? (section.sectionId === catalog.sectionId ? '#b6481c' : 'black') : (section.sectionId === catalog.sectionId ? '#b6481c' : 'white')}}">
+        {{catalog.title}}
+      </view>
+      <view catchtap="handleMoreGetCatalog" class="more-data">加载更多数据</view>
+    </scroll-view>
+  </view>
+  <!-- 目录 end -->
  </view>

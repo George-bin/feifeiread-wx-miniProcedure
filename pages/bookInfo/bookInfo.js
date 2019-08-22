@@ -56,7 +56,8 @@ Page({
   onShareAppMessage: function () {},
 
   init: function () {
-    console.log('app.globalData.activeBookInfo', app.globalData.activeBookInfo)
+
+    // console.log('app.globalData.activeBookInfo', app.globalData.activeBookInfo)
     let activeBookInfo = JSON.parse(JSON.stringify(app.globalData.activeBookInfo));
     let systemWidth = app.globalData.windowWidth;
     activeBookInfo.label = JSON.parse(activeBookInfo.label)
@@ -68,28 +69,29 @@ Page({
       title: activeBookInfo.bookName
     });
 
-    this.getCatalogList();
-  },
+    // 获取目录信息（对比缓存的章节，获取对应的目录列表）
+    let catalogStorage = wx.getStorageSync('catalogStorage');
+    if (catalogStorage && catalogStorage[this.data.bookInfo.bookId]) {
+      let index = parseInt(catalogStorage[this.data.bookInfo.bookId]);
+      let page = parseInt(index / app.globalData.activeCatalogLimit);
+      app.globalData.activeCatalogPage = parseInt(index) > app.globalData.activeCatalogLimit ? (parseInt(index) % app.globalData.activeCatalogLimit > 0 ? page : page - 1) : 0;
+    }
 
-  // 获取章节列表
-  getCatalogList () {
-    wx.request({
-      url: `${app.globalData.BASE_URL}/api/book/catalog/${this.data.bookInfo.bookId}`,
-      success: (response) => {
-        app.globalData.activeBookCatalog = response.data.catalogData;
+    // 获取目录
+    app.getCatalogList()
+      .then((response) => {
         this.setData({
           catalogData: response.data.catalogData ? response.data.catalogData : [],
           loading: false
         });
-        // console.log('目录列表', response.data.catalogData)
-      },
-      fail: (err) => {
-        console.error(err);
+        console.log('目录列表', response.data.catalogData)
+      })
+      .catch(err => {
+        console.log(err)
         this.setData({
           loading: false
         });
-      }
-    })
+      })
   },
 
   // 开始阅读

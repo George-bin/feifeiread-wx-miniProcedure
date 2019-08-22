@@ -10,11 +10,17 @@ Page({
     sectionId: '000000',
     // 章节信息
     section: '',
-    height: app.globalData.windowHeight,
+    height: 0,
     toView: '',
+    // 目录顶部
+    toCatalogView: '',
     openSet: false,
+    // 打开目录
+    openCatalog: false,
     // daytime: 白天 night: 夜晚
-    readPattern: 'daytime'
+    readPattern: 'daytime',
+    // 目录列表
+    catalogData: []
   },
 
   /**
@@ -24,8 +30,13 @@ Page({
     console.log(options)
     this.setData({
       sectionId: options.sectionId,
-      bookId: options.bookId
+      bookId: options.bookId,
+      height: app.globalData.windowHeight,
+      catalogData: JSON.parse(JSON.stringify(app.globalData.activeBookCatalog)),
+      toCatalogView: 'catalog-top'
     });
+
+    this.init();
   },
 
   /**
@@ -37,7 +48,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init()
+    // console.log('catalogData', app.globalData.activeBookCatalog)
   },
 
   /**
@@ -224,6 +235,19 @@ Page({
     });
   },
 
+  // 显示目录
+  handleOpenCatalog () {
+    this.setData({
+      openSet: false,
+      openCatalog: true
+    });
+    setTimeout(() => {
+      this.setData({
+        toCatalogView: `catalog-${this.data.section.sectionId}`
+      });
+    }, 500);
+  },
+
   // 切换阅读模式
   handleSwitchReadPattern () {
     if (this.data.readPattern === 'daytime') {
@@ -254,5 +278,73 @@ Page({
       key: 'readPattern',
       data: this.data.readPattern
     })
+  },
+
+  // 获取对应的章节信息
+  handleGetSectionBySectionId (e) {
+    console.log(e)
+    let { sectionid } = e.currentTarget.dataset;
+    this.setData({
+      sectionId: sectionid
+    });
+    wx.showLoading({
+      title: '加载中...',
+    });
+    this.getSectionContent();
+  },
+
+  // 获取目录数据
+  getCatalogData () {
+    app.getCatalogList()
+      .then(res => {
+        // console.log('目录信息', res)
+        this.setData({
+          catalogData: JSON.parse(JSON.stringify(app.globalData.activeBookCatalog)),
+          toCatalogView: 'catalog-top'
+        });
+        wx.hideLoading();
+      })
+      .catch(err => {
+        console.log(err);
+        wx.hideLoading();
+        wx.showToast({
+          title: '获取目录列表失败!',
+          icon: 'none'
+        });
+      })
+  },
+
+  // 获取更多目录信息
+  handleMoreGetCatalog () {
+    // let page = app.globalData.activeCatalogPage;
+    app.globalData.activeCatalogPage += 1;
+    wx.showLoading({
+      title: '加载中...',
+    });
+    this.getCatalogData();
+  },
+
+  // 滚动到目录列表顶部
+  onScrollCatalogtoupper () {
+    if (app.globalData.activeCatalogPage === 0) return;
+    app.globalData.activeCatalogPage -= 1;
+    wx.showLoading({
+      title: '加载中...',
+    });
+    this.getCatalogData();
+  },
+  
+    // 关闭目录
+  handleCloseCatalog () {
+    this.setData({
+      openCatalog: false
+    });
+
+    let secionIdIndex = this.data.catalogData.findIndex(item => item.sectionId === this.data.section.sectionId)
+    if (secionIdIndex < 0) {
+      let page = parseInt(this.data.section.sectionId / app.globalData.activeCatalogLimit);
+      app.globalData.activeCatalogPage = parseInt(this.data.section.sectionId) > app.globalData.activeCatalogLimit ? (parseInt(this.data.section.sectionId) % app.globalData.activeCatalogLimit > 0 ? page : page - 1) : 0
+      this.getCatalogData();
+    }
   }
 })

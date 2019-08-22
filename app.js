@@ -15,6 +15,24 @@ App({
       },
     })
   },
+
+  // 获取章节列表
+  getCatalogList() {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${this.globalData.BASE_URL}/api/book/catalog/${this.globalData.activeBookInfo.bookId}?page=${this.globalData.activeCatalogPage}&limit=${this.globalData.activeCatalogLimit}`,
+        success: (response) => {
+          this.globalData.activeBookCatalog = response.data.catalogData;
+          resolve(response)
+        },
+        fail: (err) => {
+          // console.error(err);
+          reject(err);
+        }
+      })
+    })
+  },
+
   globalData: {
     userInfo: null,
     // BASE_URL: 'http://localhost:3000',
@@ -25,6 +43,10 @@ App({
     // 当前小说详情
     activeBookInfo: {},
     // 当前小说章节列表
-    activeBookCatalog: []
+    activeBookCatalog: [],
+    // 当前获取的目录页数
+    activeCatalogPage: 0,
+    // 每次获取目录数据的条数
+    activeCatalogLimit: 100
   }
 })

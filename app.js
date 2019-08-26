@@ -47,6 +47,8 @@ App({
     // 当前获取的目录页数
     activeCatalogPage: 0,
     // 每次获取目录数据的条数
-    activeCatalogLimit: 100
+    activeCatalogLimit: 100,
+    // 当前分类书籍
+    activeClassify: {}
   }
 })

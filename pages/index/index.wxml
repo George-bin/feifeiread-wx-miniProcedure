@@ -12,7 +12,7 @@
         class="classify-title"
         style="padding-left: {{(systemWidth-3*120) / 4 + 'px'}}; padding-right: {{(systemWidth-3*120) / 4 + 'px'}}">
         <text class="title">{{classify.classifyName}}</text>
-        <text class="more">更多</text>
+        <text class="more" bindtap="handleShowMoreBook" data-classify="{{classify.classifyName}}">更多</text>
       </view>
       <view
         class="classify-book-list"

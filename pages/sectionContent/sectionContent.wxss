@@ -44,22 +44,45 @@
 .set-up-section {
   position: fixed;
   bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
+  left: 0;  
   width: 100%;
-  height: 40px;
   color: white;
   background: black;
   transition: 0.3s all;
 }
 
-.set-up-section .set-up-item {
+.set-up-section .bottom-set {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.section-set {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #b6481c;
+}
+
+.bottom-set .bottom-set-item {
   flex: 1;
   text-align: center;
 }
 
-.set-up-section .set-up-item .iconfont {
+.bottom-set .bottom-set-item text {
+  display: block;
+}
+
+.bottom-set .bottom-set-item .des {
+  margin-top: 4px;
+  font-size: 10px;
+}
+
+.bottom-set .bottom-set-item .iconfont {
   font-size: 22px;
 }
 

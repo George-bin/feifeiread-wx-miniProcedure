@@ -5,7 +5,8 @@
     "pages/catalog/catalog",
     "pages/bookInfo/bookInfo",
     "pages/sectionContent/sectionContent",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/moreBoox/moewBoox"
   ],
   "window": {
     "backgroundTextStyle": "light",

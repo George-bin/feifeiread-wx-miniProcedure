@@ -32,14 +32,30 @@
   <!-- 设置 start -->
   <view
     class="set-up-section"
-    style="transform: {{openSet ? 'translateY(0)' : 'translateY(40px)'}}">
-    <view class="set-up-item" bindtap="handleOpenCatalog">
-      <text class="iconfont icon-liebiao"></text>
-    </view>
-    <view class="set-up-item" bindtap="handleSwitchReadPattern">
-      <!-- wx:if="{{readPattern === 'daytime'}}" -->
-      <text class="iconfont icon-icon_baitian" bindtap="handleSwitchReadPattern"></text>
-      <!-- <text wx:else class="iconfont icon-lkingboyewanyueliang" bindtap="handleSwitchReadPattern"></text> -->
+    style="transform: {{openSet ? 'translateY(0)' : 'translateY(100%)'}}">
+    <!-- <view class="set-up-item section-set">
+      <text>上一章</text>
+      <text>下一章</text>
+    </view> -->
+    <view class="set-up-item bottom-set">
+      <view class="open-catalog-btn bottom-set-item" bindtap="handleOpenCatalog">
+        <text class="iconfont icon-liebiao"></text>
+        <text class="des">目录</text>
+      </view>
+      <view class="open-catalog-btn bottom-set-item" bindtap="">
+        <text class="iconfont icon-ai251" style="font-size: 24px;"></text>
+         <text class="des">亮度</text>
+      </view>
+      <view class="read-pattern-btn bottom-set-item" bindtap="handleSwitchReadPattern">
+        <!-- wx:if="{{readPattern === 'daytime'}}" -->
+        <text class="iconfont icon-icon_baitian" style="font-size: 24px;"></text>
+          <text class="des">模式</text>
+        <!-- <text wx:else class="iconfont icon-lkingboyewanyueliang" bindtap="handleSwitchReadPattern"></text> -->
+      </view>
+      <view class="open-catalog-btn bottom-set-item" bindtap="">
+        <text class="iconfont icon-danseshixintubiao-"></text>
+        <text class="des">设置</text>
+      </view>
     </view>
   </view>
   <!-- 设置 end -->

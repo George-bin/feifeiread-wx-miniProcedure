@@ -51,6 +51,12 @@
   </view>
   <!-- 阅读 -->
   <view class="start-read-section">
+    <view>
+      <text class="iconfont icon-liebiao"></text>
+    </view>
+    <view>
+      <text class="iconfont icon-shujia"></text>
+    </view>
     <button
       wx:if="{{catalogData.length || loading}}"
       class="start-read-btn"

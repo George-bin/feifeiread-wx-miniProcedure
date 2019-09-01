@@ -9,8 +9,7 @@ Page({
     bookInfo: {},
     // 目录数据
     catalogData: [],
-    systemWidth: 0,
-    loading: true
+    systemWidth: 0
   },
 
   /**
@@ -77,20 +76,21 @@ Page({
       app.globalData.activeCatalogPage = parseInt(index) > app.globalData.activeCatalogLimit ? (parseInt(index) % app.globalData.activeCatalogLimit > 0 ? page : page - 1) : 0;
     }
 
+    wx.showLoading({
+      title: '加载中'
+    });
     // 获取目录
     app.getCatalogList()
       .then((response) => {
         this.setData({
-          catalogData: response.data.catalogData ? response.data.catalogData : [],
-          loading: false
+          catalogData: response.data.catalogData ? response.data.catalogData : []
         });
-        console.log('目录列表', response.data.catalogData)
+        console.log('目录列表', response.data.catalogData);
+        wx.hideLoading();
       })
       .catch(err => {
-        console.log(err)
-        this.setData({
-          loading: false
-        });
+        console.log(err);
+        wx.hideLoading();
       })
   },
 

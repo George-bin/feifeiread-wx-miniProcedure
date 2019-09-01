@@ -35,8 +35,8 @@ App({
 
   globalData: {
     userInfo: null,
-    // BASE_URL: 'http://localhost:3000',
-    BASE_URL: 'https://www.gengshaobin.top',
+    BASE_URL: 'http://localhost:3000',
+    // BASE_URL: 'https://www.gengshaobin.top',
     // 设备宽高
     windowWidth: '',
     windowHeight: '',

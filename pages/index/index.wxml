@@ -16,14 +16,15 @@
       </view>
       <view
         class="classify-book-list"
-        style="padding-left: {{(systemWidth-3*120) / 4 + 'px'}}; padding-right: {{(systemWidth-3*120) / 4 + 'px'}}">
+        style="padding-right: {{(systemWidth-3*120) / 4 + 'px'}}">
         <view
           wx:for="{{classify.bookList}}"
           wx:for-item="book"
           wx:key="{{book._id}}"
           bindtap="handleGoSectionContent"
           data-book="{{book}}"
-          class="book-list-item">
+          class="book-list-item"
+          style="margin-left: {{(systemWidth-3*120) / 4 + 'px'}}; ">
             <view class="book-cover"><image mode="scaleToFill" src="{{book.bookCover}}"></image></view>
             <view class="book-name"><text class="value">{{book.bookName}}</text></view>
             <!-- 评分 -->

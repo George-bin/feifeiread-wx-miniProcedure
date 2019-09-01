@@ -89,21 +89,43 @@
 /* 阅读 */
 .bookinfo-container .start-read-section {
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
+  left: 0;
   display: flex;
   width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  /* border-top: 1px solid #dfdfdf; */
+  box-shadow: 0 5px 5px 5px #dfdfdf;
+}
+
+.bookinfo-container .start-read-section .btn {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 54px;
   text-align: center;
 }
 
+.bookinfo-container .start-read-section text {
+  width: 100%;
+}
+
+.bookinfo-container .start-read-section .label {
+  font-size: 10px;
+}
+
+.bookinfo-container .start-read-section .iconfont {
+  font-size: 24px;
+}
+
 .bookinfo-container .start-read-section .start-read-btn, .bookinfo-container .start-read-section .no-content-btn {
-  width: 200px;
-  height: 34px;
-  line-height: 34px;
   border: 0;
   font-size: 16px;
   color: white;
   background: #4bb8c5;
-  border-radius: 30px;
 }
 
 .bookinfo-container .start-read-section .no-content-btn {

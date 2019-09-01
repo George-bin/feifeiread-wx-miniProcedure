@@ -71,13 +71,17 @@ Page({
         console.log(res)
         let { code } = res;
         wx.request({
-          url: `${app.globalData.BASE_URL}/api/book/getOpenid`,
+          url: `${app.globalData.BASE_URL}/api/book/wx/login`,
           method: 'POST',
           data: {
             code
           },
           success: (res) => {
-            console.log('获取openid', res.data)
+            console.log('获取openid', res.data.sessionId)
+            wx.setStorage({
+              key: 'sessionId',
+              data: res.data.sessionId
+            });
           },
           fail: (err) => {
             console.log(err)

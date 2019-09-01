@@ -44,8 +44,12 @@ Page({
     wx.showLoading({
       title: '数据加载中...',
     });
+    let sessionId = wx.getStorageSync('sessionId')
     wx.request({
-      url: `${app.globalData.BASE_URL}/api/book/list?classify=推理悬疑`,
+      url: `${app.globalData.BASE_URL}/api/book/list/base`,
+      header: {
+        sessionId: sessionId
+      },
       success: (response) => {
         // console.log(response.data);
         this.setData({

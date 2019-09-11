@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/catalog/catalog",
+    "pages/bookrack/bookrack",
     "pages/bookInfo/bookInfo",
     "pages/sectionContent/sectionContent",
     "pages/my/my",
@@ -19,7 +19,7 @@
     "selectedColor": "#4bb8c5",
     "list": [
       {
-        "pagePath": "pages/catalog/catalog",
+        "pagePath": "pages/bookrack/bookrack",
         "text": "书架",
         "iconPath": "images/bookrack.png",
         "selectedIconPath": "images/bookrack-sel.png"

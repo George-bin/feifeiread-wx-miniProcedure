@@ -4,7 +4,32 @@ App({
     this.init();
     this.getSystemInfo()
   },
-  init: function () {},
+  init: function () {
+    wx.login({
+      success: (res) => {
+        console.log(res)
+        let { code } = res;
+        wx.request({
+          url: `${this.globalData.BASE_URL}/api/book/wx/login`,
+          method: 'POST',
+          data: {
+            code
+          },
+          success: (res) => {
+            console.log('获取openid', res.data.sessionId)
+            wx.setStorage({
+              key: 'sessionId',
+              data: res.header['Set-Cookie']
+            });
+          },
+          fail: (err) => {
+            console.log(err)
+          }
+        })
+      },
+      fail: (err) => { }
+    })
+  },
   // 获取系统信息
   getSystemInfo () {
     wx.getSystemInfo({
@@ -35,8 +60,8 @@ App({
 
   globalData: {
     userInfo: null,
-    // BASE_URL: 'http://localhost:3000',
-    BASE_URL: 'https://www.gengshaobin.top',
+    BASE_URL: 'http://localhost:3000',
+    // BASE_URL: 'https://www.gengshaobin.top',
     // 设备宽高
     windowWidth: '',
     windowHeight: '',

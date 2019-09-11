@@ -65,30 +65,5 @@ Page({
 
   },
   // 用户登录
-  handleLogin: function () {
-    wx.login({
-      success: (res) => {
-        console.log(res)
-        let { code } = res;
-        wx.request({
-          url: `${app.globalData.BASE_URL}/api/book/wx/login`,
-          method: 'POST',
-          data: {
-            code
-          },
-          success: (res) => {
-            console.log('获取openid', res.data.sessionId)
-            wx.setStorage({
-              key: 'sessionId',
-              data: res.data.sessionId
-            });
-          },
-          fail: (err) => {
-            console.log(err)
-          }
-        })
-      },
-      fail: (err) => { }
-    })
-  }
+  handleLogin: function () {  }
 })

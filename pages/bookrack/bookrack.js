@@ -1,3 +1,4 @@
+let app = getApp();
 // pages/catalog/catalog.js
 Page({
 
@@ -12,7 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -26,7 +27,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.handleGetBookRackInfo()
   },
 
   /**
@@ -62,5 +63,25 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  // 获取书架信息
+  handleGetBookRackInfo: function () {
+    wx.request({
+      url: `${app.globalData.BASE_URL}/api/book/bookrackInfo`,
+      method: 'GET',
+      header: {
+        // 默认值
+        'content-type': 'application/json',
+        // 读取sessionid,当作cookie传入后台将PHPSESSID做session_id使用
+        'cookie': wx.getStorageSync("sessionId")
+      },
+      success: (res) => {
+        console.log('书架信息:', res)
+      },
+      fail: (err) => {
+        console.log(err)
+      }
+    })
   }
 })

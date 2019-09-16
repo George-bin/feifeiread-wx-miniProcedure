@@ -6,7 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    userInfo: null,
+    // 书架信息
+    bookList: [],
+    // 边距
+    backGauge: 0
   },
 
   /**
@@ -27,6 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.init()
     this.handleGetBookRackInfo()
   },
 
@@ -65,8 +70,18 @@ Page({
 
   },
 
+  init () {
+    wx.setNavigationBarTitle({
+      title: '我的书架'
+    });
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      backGauge: (app.globalData.windowWidth - 90 * 4) / 5
+    });
+  },
+
   // 获取书架信息
-  handleGetBookRackInfo: function () {
+  handleGetBookRackInfo () {
     wx.request({
       url: `${app.globalData.BASE_URL}/api/book/bookrackInfo`,
       method: 'GET',
@@ -78,6 +93,9 @@ Page({
       },
       success: (res) => {
         console.log('书架信息:', res)
+        this.setData({
+          bookList: res.data.bookList
+        });
       },
       fail: (err) => {
         console.log(err)

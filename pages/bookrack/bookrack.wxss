@@ -1,1 +1,32 @@
 /* pages/catalog/catalog.wxss */
+page {
+  height: 100vh;
+  background: #bee6ea;
+}
+
+.bookrack-container {}
+
+.bookrack-container .book-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.book-list .book-list-item {
+  margin-top: 10px;
+}
+
+.book-list-item .book-cover {
+  padding: 5px;
+  background: white;
+}
+
+.book-list-item .book-cover image {
+  width: 80px;
+  height: 110px;
+  vertical-align: bottom;
+}
+
+.book-list .book-list-item .book-name {
+  font-size: 14px;
+  text-align: center;
+}

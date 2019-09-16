@@ -5,29 +5,90 @@ App({
     this.getSystemInfo()
   },
   init: function () {
-    wx.login({
+    wx.checkSession({
       success: (res) => {
-        console.log(res)
-        let { code } = res;
-        wx.request({
-          url: `${this.globalData.BASE_URL}/api/book/wx/login`,
-          method: 'POST',
-          data: {
-            code
-          },
-          success: (res) => {
-            console.log('获取openid', res.data.sessionId)
-            wx.setStorage({
-              key: 'sessionId',
-              data: res.header['Set-Cookie']
-            });
-          },
-          fail: (err) => {
-            console.log(err)
-          }
-        })
+        if (wx.getStorageSync('sessionId')) {
+          this.autoLogin();
+        }
       },
-      fail: (err) => { }
+      fail: (err) => {
+        // 重新登录微信服务
+        this.getOpenid()
+          .then(() => {
+            this.autoLogin();
+          })
+      }
+    })
+  },
+  // 自动登录
+  autoLogin () {
+    wx.request({
+      url: `${this.globalData.BASE_URL}/api/book/wx/login`,
+      method: 'post',
+      data: {
+        account: 'geng',
+        password: '123'
+      },
+      header: {
+        // 默认值
+        'content-type': 'application/json',
+        // 读取sessionid,当作cookie传入后台将PHPSESSID做session_id使用
+        'cookie': wx.getStorageSync("sessionId")
+      },
+      success: (res) => {
+        console.log(res);
+        let { errcode } = res.data
+        if (res.data.errcode === 0) {
+          wx.showToast({
+            title: '登录成功',
+            icon: 'success',
+            duration: 2000
+          });
+          this.globalData.userInfo = res.data.userInfo;
+        } else if (errcode === 991) {
+          // 服务器登录态失效
+          this.getOpenid()
+            .then(() => {
+              this.autoLogin();
+            }) 
+        }
+      },
+      fail: (err) => {
+        console.log(err);
+        this.globalData.userInfo = null;
+      }
+    })
+  },
+  // 获取openid(登录微信服务器)
+  getOpenid () {
+    return new Promise((resolve, reject) => {
+      wx.login({
+        success: (res) => {
+          console.log(res)
+          let { code } = res;
+          wx.request({
+            url: `${this.globalData.BASE_URL}/api/book/wx/getOpenid`,
+            method: 'POST',
+            data: {
+              code
+            },
+            success: (res) => {
+              wx.setStorage({
+                key: 'sessionId',
+                data: res.header['Set-Cookie']
+              });
+              resolve();
+            },
+            fail: (err) => {
+              console.log(err)
+            }
+          })
+        },
+        fail: (err) => {
+          console.log('微信服务器登录失败!');
+          reject(err);
+        }
+      });
     })
   },
   // 获取系统信息
@@ -59,9 +120,10 @@ App({
   },
 
   globalData: {
+    // 用户信息
     userInfo: null,
-    BASE_URL: 'http://localhost:3000',
-    // BASE_URL: 'https://www.gengshaobin.top',
+    // BASE_URL: 'http://localhost',
+    BASE_URL: 'https://www.gengshaobin.top',
     // 设备宽高
     windowWidth: '',
     windowHeight: '',

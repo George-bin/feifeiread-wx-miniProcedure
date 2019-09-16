@@ -1,4 +1,24 @@
-<view>
-  <text></text>
-  <button bindtap="handleLogin">登录</button>
+<view class="my-container">
+  <!-- 尚未登录 -->
+  <view wx:if="{{!userInfo}}" class="login-section">
+    <input
+      class="account-inp"
+      value="{{loginForm.account}}"
+      placeholder="请输入用户名!"
+      bindinput="handleGetAccount"></input>
+    <input
+      class="pwd-inp"
+      value="{{loginForm.password}}"
+      placeholder="请输入用户密码!"
+      bindinput="handleGetPassword"></input>
+    <button class="login-btn" open-type="getUserInfo" bindgetuserinfo="handleLogin" loading="{{loading}}">登录</button>
+  </view>
+  <!-- 已登录 -->
+  <view wx:else class="user-info-section">
+    <view class="avatar">
+      <image src="{{userInfo.avatarUrl}}"></image>
+    </view>
+    <view class="username">{{userInfo.username}}</view>
+    <button class="logon-btn" bindtap="handleLogon">注销</button>
+  </view>
 </view>

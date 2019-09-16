@@ -1,5 +1,17 @@
 <!--pages/catalog/catalog.wxml-->
-<view>
-  <text>小说详情</text>
-  <text>小说详情</text>
+<view class="bookrack-container">
+  <view wx:if="{{!userInfo}}">尚未登录!</view>
+  <view wx:else class="book-list">
+    <view
+      wx:for="{{bookList}}"
+      wx:key="{{book._id}}"
+      wx:for-item="book"
+      class="book-list-item"
+      style="padding-left: {{backGauge + 'px'}}">
+      <view class="book-cover">
+        <image src="{{book.bookCover}}"></image>
+      </view>
+      <view class="book-name">{{book.bookName}}</view>
+    </view>
+  </view>
 </view>

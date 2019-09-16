@@ -50,22 +50,11 @@
     <view class="value"><text>{{bookInfo.bookIntro}}</text></view>
   </view>
   <!-- 阅读 -->
-  <view class="start-read-section">
+  <view wx:if="{{userInfo}}" class="start-read-section">
     <view class="catalog btn">
       <text class="iconfont icon-liebiao"></text>
       <text class="label">目录</text>
     </view>
-    <!-- <button
-      wx:if="{{catalogData.length || loading}}"
-      class="start-read-btn"
-      bindtap="handleStartRead"
-      loading="{{loading}}"
-      disabled="{{loading}}"
-      style="background: {{loading ? 'gray' : '#4bb8c5'}}"
-      class="btn">
-      免费阅读
-    </button>
-    <button wx:else class="no-content-btn btn">暂无数据!</button> -->
     <view
       class="btn"
       bindtap="handleStartRead"
@@ -74,9 +63,13 @@
       <text class="label" wx:if="{{catalogData.length || loading}}">免费阅读</text>
       <text class="label" wx:else>暂无数据!</text>
     </view>
-    <view class="bookrack btn">
+    <view class="bookrack btn" bindtap="handleJoinBookrack">
       <text class="iconfont icon-shujia"></text>
-      <text class="label">加入书架</text>
+      <text wx:if="{{!isAddToBookrack}}" class="label">加入书架</text>
+      <text wx:else class="label" style="color: gray">已添加</text>
     </view>
+  </view>
+  <view wx:else class="no-logon-section">
+    <view>尚未登录!</view>
   </view>
 </view>

@@ -9,7 +9,10 @@ Page({
     bookInfo: {},
     // 目录数据
     catalogData: [],
-    systemWidth: 0
+    systemWidth: 0,
+    userInfo: null,
+    // 是否已经添加至书架
+    isAddToBookrack: false
   },
 
   /**
@@ -54,15 +57,16 @@ Page({
    */
   onShareAppMessage: function () {},
 
-  init: function () {
-
+  init () {
     // console.log('app.globalData.activeBookInfo', app.globalData.activeBookInfo)
     let activeBookInfo = JSON.parse(JSON.stringify(app.globalData.activeBookInfo));
     let systemWidth = app.globalData.windowWidth;
     activeBookInfo.label = JSON.parse(activeBookInfo.label)
     this.setData({
+      userInfo: app.globalData.userInfo,
       bookInfo: activeBookInfo,
-      systemWidth
+      systemWidth,
+      isAddToBookrack: app.globalData.userInfo && app.globalData.userInfo.bookIdList.includes(activeBookInfo.bookId) ? true : false
     });
     wx.setNavigationBarTitle({
       title: activeBookInfo.bookName
@@ -95,9 +99,54 @@ Page({
   },
 
   // 开始阅读
-  handleStartRead() {
+  handleStartRead () {
     wx.navigateTo({
       url: `../sectionContent/sectionContent?sectionId=000000&bookId=${this.data.bookInfo.bookId}`,
+    })
+  },
+
+  // 加入书架
+  handleJoinBookrack () {
+    if (this.data.isAddToBookrack) return;
+    wx.request({
+      url: `${app.globalData.BASE_URL}/api/book/joinBookrack`,
+      method: 'POST',
+      data: {
+        bookId: this.data.bookInfo.bookId
+      },
+      header: {
+        // 默认值
+        'content-type': 'application/json',
+        // 读取sessionid,当作cookie传入后台将PHPSESSID做session_id使用
+        'cookie': wx.getStorageSync("sessionId")
+      },
+      success: (res) => {
+        let { errcode } = res.data;
+        if (errcode === 0) {
+          wx.showToast({
+            title: '加入书架成功!',
+            icon: 'success',
+            duration: 2000
+          });
+        } else if (errcode === 991) {
+          // 服务器登录态失效
+
+        } else if (errcode === 889) {
+          // 书籍已添加
+          wx.showToast({
+            title: '小说已添加至书架!',
+            icon: 'none',
+            duration: 2000
+          });
+        }
+      },
+      fail: (err) => {
+        wx.showToast({
+          title: '加入书架失败!',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     })
   }
 })

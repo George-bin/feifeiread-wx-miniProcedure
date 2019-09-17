@@ -121,13 +121,17 @@ Page({
         'cookie': wx.getStorageSync("sessionId")
       },
       success: (res) => {
-        let { errcode } = res.data;
+        let { errcode, bookIdList } = res.data;
         if (errcode === 0) {
           wx.showToast({
             title: '加入书架成功!',
             icon: 'success',
             duration: 2000
           });
+          this.setData({
+            'userInfo.bookIdList': JSON.parse(JSON.stringify(bookIdList))
+          });
+          app.globalData.userInfo.bookIdList = JSON.parse(JSON.stringify(bookIdList));
         } else if (errcode === 991) {
           // 服务器登录态失效
 

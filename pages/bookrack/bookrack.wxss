@@ -1,7 +1,7 @@
 /* pages/catalog/catalog.wxss */
 page {
   height: 100vh;
-  background: #bee6ea;
+  background: #e8e8e8;
 }
 
 .bookrack-container {}
@@ -21,12 +21,40 @@ page {
 }
 
 .book-list-item .book-cover image {
-  width: 80px;
-  height: 110px;
+  width: 75px;
+  height: 100px;
   vertical-align: bottom;
 }
 
 .book-list .book-list-item .book-name {
   font-size: 14px;
   text-align: center;
+}
+
+/* 长按设置 */
+.long-btp-set-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* background: rgba(0, 0, 0, 0.2); */
+}
+
+.long-tab-set-list {
+  position: fixed;
+  right: 0;
+  bottom: 100px;
+  width: 170px;
+  font-size: 15px;
+  background: white;
+  box-shadow: 0 0 5px #dfdfdf;
+  transition: 0.3s all;
+}
+
+.long-tab-set-list .long-tab-set-list-item {
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  letter-spacing: 2px;
 }

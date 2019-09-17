@@ -19,12 +19,12 @@ Page({
       url: '../logs/logs'
     });
   },
-  onLoad: function () {
+  onLoad () {
     this.init();
     this.getBookList();
   },
 
-  init: function () {
+  init () {
     this.setData({
       systemWidth: app.globalData.windowWidth
     });

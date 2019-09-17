@@ -10,7 +10,8 @@ Page({
     // 书架信息
     bookList: [],
     // 边距
-    backGauge: 0
+    backGauge: 0,
+    openSet: false
   },
 
   /**
@@ -76,7 +77,7 @@ Page({
     });
     this.setData({
       userInfo: app.globalData.userInfo,
-      backGauge: (app.globalData.windowWidth - 90 * 4) / 5
+      backGauge: (app.globalData.windowWidth - 85 * 4) / 5
     });
   },
 
@@ -101,5 +102,19 @@ Page({
         console.log(err)
       }
     })
+  },
+
+  // 操作书架上的小说
+  handleOpenSetBook () {
+    console.log('准备删除')
+    this.setData({
+      openSet: true
+    });
+  },
+
+  handleCloseSetBook () {
+    this.setData({
+      openSet: false
+    });
   }
 })

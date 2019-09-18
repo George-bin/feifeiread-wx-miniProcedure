@@ -48,15 +48,19 @@ page {
 }
 
 .user-info-section .avatar {
-  
-}
-
-.user-info-section .avatar image {
-  width: 80px;
-  height: 80px;
+  display: inline-block;
+  padding: 6px;
   background: white;
   border-radius: 50%;
   box-shadow: 0 0 10px gray;
+}
+
+.user-info-section .avatar image {
+  width: 70px;
+  height: 70px;
+  background: white;
+  border-radius: 50%;
+  vertical-align: bottom;
 }
 
 .user-info-section .username {

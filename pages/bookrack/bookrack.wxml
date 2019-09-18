@@ -8,7 +8,11 @@
       wx:for-item="book"
       class="book-list-item"
       style="padding-left: {{backGauge + 'px'}}"
-      bindlongtap="handleOpenSetBook">
+      data-book="{{book}}"
+      bindtouchstart="handleTouchStart"
+      bindtouchend="handleTouchEnd"
+      bindlongtap="handleOpenSetBook"
+      bindtap="handleStartRead">
       <view class="book-cover">
         <image src="{{book.bookCover}}"></image>
       </view>
@@ -20,7 +24,7 @@
   <view
     class="long-tab-set-list"
     style="transform: {{openSet ? 'translateX(0)' : 'translateX(100%)'}}">
-    <view class="long-tab-set-list-item">移出书架</view>
+    <view class="long-tab-set-list-item" bindtap="handleRemoveBook">移出书架</view>
   </view>
   <view
     wx:if="{{openSet}}"

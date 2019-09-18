@@ -22,6 +22,7 @@ Page({
   onLoad () {
     this.init();
     this.getBookList();
+    app.getBookrackInfo();
   },
 
   init () {

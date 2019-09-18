@@ -50,6 +50,7 @@ page {
   background: white;
   box-shadow: 0 0 5px #dfdfdf;
   transition: 0.3s all;
+  z-index: 999;
 }
 
 .long-tab-set-list .long-tab-set-list-item {

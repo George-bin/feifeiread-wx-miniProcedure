@@ -45,6 +45,7 @@ App({
             duration: 2000
           });
           this.globalData.userInfo = res.data.userInfo;
+          this.getBookrackInfo();
         } else if (errcode === 991) {
           // 服务器登录态失效
           this.getOpenid()
@@ -81,16 +82,22 @@ App({
             },
             fail: (err) => {
               console.log(err)
+              reject(err)
             }
           })
         },
         fail: (err) => {
           console.log('微信服务器登录失败!');
+          wx.showToast({
+            title: '微信服务器登录失败!',
+            icon: 'none'
+          });
           reject(err);
         }
       });
     })
   },
+
   // 获取系统信息
   getSystemInfo () {
     wx.getSystemInfo({
@@ -119,11 +126,37 @@ App({
     })
   },
 
+  // 获取书架信息
+  getBookrackInfo () {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${this.globalData.BASE_URL}/api/book/bookrackInfo`,
+        method: 'GET',
+        header: {
+          // 默认值
+          'content-type': 'application/json',
+          // 读取sessionid,当作cookie传入后台将PHPSESSID做session_id使用
+          'cookie': wx.getStorageSync("sessionId")
+        },
+        success: (res) => {
+          let { errcode, bookList } = res.data;
+          if (res.data.errcode === 0) {
+            this.globalData.bookrackList = bookList
+          }
+          resolve(res)
+        },
+        fail: (err) => {
+          reject(err);
+        }
+      })
+    })
+  },
+
   globalData: {
     // 用户信息
     userInfo: null,
-    BASE_URL: 'http://localhost',
-    // BASE_URL: 'https://www.gengshaobin.top',
+    // BASE_URL: 'http://localhost',
+    BASE_URL: 'https://www.gengshaobin.top',
     // 设备宽高
     windowWidth: '',
     windowHeight: '',
@@ -134,8 +167,10 @@ App({
     // 当前获取的目录页数
     activeCatalogPage: 0,
     // 每次获取目录数据的条数
-    activeCatalogLimit: 100,
+    activeCatalogLimit: 30,
     // 当前分类书籍
-    activeClassify: {}
+    activeClassify: {},
+    // 书架列表
+    bookrackList: []
   }
 })

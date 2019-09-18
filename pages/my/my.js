@@ -132,6 +132,10 @@ Page({
             },
             fail: (err) => {
               console.log(err);
+              wx.showToast({
+                title: '登录失败!',
+                icon: 'none'
+              })
               app.globalData.userInfo = null;
               this.setData({
                 loading: false

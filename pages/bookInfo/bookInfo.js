@@ -61,12 +61,15 @@ Page({
     // console.log('app.globalData.activeBookInfo', app.globalData.activeBookInfo)
     let activeBookInfo = JSON.parse(JSON.stringify(app.globalData.activeBookInfo));
     let systemWidth = app.globalData.windowWidth;
-    activeBookInfo.label = JSON.parse(activeBookInfo.label)
+    activeBookInfo.label = JSON.parse(activeBookInfo.label);
+    let index = app.globalData.bookrackList.findIndex(item => {
+      return item.bookId === activeBookInfo.bookId;
+    })
     this.setData({
       userInfo: app.globalData.userInfo,
       bookInfo: activeBookInfo,
       systemWidth,
-      isAddToBookrack: app.globalData.userInfo && app.globalData.userInfo.bookIdList.includes(activeBookInfo.bookId) ? true : false
+      isAddToBookrack: index >= 0 ? true : false
     });
     wx.setNavigationBarTitle({
       title: activeBookInfo.bookName
@@ -129,9 +132,9 @@ Page({
             duration: 2000
           });
           this.setData({
-            'userInfo.bookIdList': JSON.parse(JSON.stringify(bookIdList))
+            isAddToBookrack: true
           });
-          app.globalData.userInfo.bookIdList = JSON.parse(JSON.stringify(bookIdList));
+          app.getBookrackInfo();
         } else if (errcode === 991) {
           // 服务器登录态失效
 

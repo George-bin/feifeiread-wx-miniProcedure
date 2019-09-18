@@ -136,6 +136,12 @@ Page({
   getSectionContent () {
     wx.request({
       url: `${app.globalData.BASE_URL}/api/book/content/${this.data.bookId}/${this.data.sectionId}`,
+      header: {
+        // 默认值
+        'content-type': 'application/json',
+        // 读取sessionid,当作cookie传入后台将PHPSESSID做session_id使用
+        'cookie': wx.getStorageSync("sessionId")
+      },
       success: (response) => {
         // 设置章节缓存 start
         let catalogStorage = wx.getStorageSync('catalogStorage');

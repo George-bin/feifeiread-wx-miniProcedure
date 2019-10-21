@@ -15,6 +15,10 @@ Page({
     // 目录顶部
     toCatalogView: '',
     openSet: false,
+    // 亮度调节
+    openLuminanceSet: false,
+    // 屏幕亮度
+    luminance: 0,
     // 打开目录
     openCatalog: false,
     // daytime: 白天 night: 夜晚
@@ -49,6 +53,13 @@ Page({
    */
   onShow: function () {
     // console.log('catalogData', app.globalData.activeBookCatalog)
+    wx.getScreenBrightness({
+      success: (res) => {
+        this.setData({
+          luminance: parseFloat(res.value).toFixed(1)
+        });
+      }
+    });
   },
 
   /**
@@ -340,7 +351,7 @@ Page({
     this.getCatalogData();
   },
   
-    // 关闭目录
+  // 关闭目录
   handleCloseCatalog () {
     this.setData({
       openCatalog: false
@@ -352,5 +363,25 @@ Page({
       app.globalData.activeCatalogPage = parseInt(this.data.section.sectionId) > app.globalData.activeCatalogLimit ? (parseInt(this.data.section.sectionId) % app.globalData.activeCatalogLimit > 0 ? page : page - 1) : 0
       this.getCatalogData();
     }
+  },
+
+  // 打开亮度设置
+  handleOpenLuminanceSet () {
+    this.setData({
+      openLuminanceSet: !this.data.openLuminanceSet
+    })
+  },
+
+  // 设置屏幕亮度
+  handleSetnLuminance (e) {
+    let { value } = e.detail;
+    this.setData({
+      luminance: parseFloat(value).toFixed(1)
+    });
+    console.log(e.detail)
+    //给屏幕亮度赋值
+    wx.setScreenBrightness({
+      value: parseFloat(value).toFixed(1)
+    })
   }
 })

@@ -51,6 +51,10 @@
   transition: 0.3s all;
 }
 
+.set-up-section .luminance-set {
+  padding: 5px 10px;
+}
+
 .set-up-section .bottom-set {
   width: 100%;
   display: flex;

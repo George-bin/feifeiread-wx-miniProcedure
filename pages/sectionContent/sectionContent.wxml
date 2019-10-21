@@ -33,23 +33,32 @@
   <view
     class="set-up-section"
     style="transform: {{openSet ? 'translateY(0)' : 'translateY(100%)'}}">
-    <!-- <view class="set-up-item section-set">
-      <text>上一章</text>
-      <text>下一章</text>
-    </view> -->
+    <!-- 亮度调整 start -->
+    <view class="luminance-set" wx:if="{{openLuminanceSet}}">
+      <slider
+        bindchange="handleSetnLuminance"
+        left-icon="cancel"
+        right-icon="success_no_circle"
+        selected-color="white"
+        color="gray"
+        block-size="18"
+        value="{{luminance}}" />
+    </view>
+    <!-- 亮度调整 end -->
     <view class="set-up-item bottom-set">
       <view class="open-catalog-btn bottom-set-item" bindtap="handleOpenCatalog">
         <text class="iconfont icon-liebiao"></text>
         <text class="des">目录</text>
       </view>
-      <view class="open-catalog-btn bottom-set-item" bindtap="">
+      <view class="open-catalog-btn bottom-set-item" bindtap="handleOpenLuminanceSet">
         <text class="iconfont icon-ai251" style="font-size: 24px;"></text>
-         <text class="des">亮度</text>
+        <text class="des">亮度</text>
       </view>
       <view class="read-pattern-btn bottom-set-item" bindtap="handleSwitchReadPattern">
         <!-- wx:if="{{readPattern === 'daytime'}}" -->
-        <text class="iconfont icon-icon_baitian" style="font-size: 24px;"></text>
-          <text class="des">模式</text>
+        <text wx:if="{{readPattern === 'daytime'}}" class="iconfont icon-icon_baitian" style="font-size: 24px;"></text>
+        <text wx:else class="iconfont icon-yueliang" style="font-size: 24px;"></text>
+        <text class="des">模式</text>
         <!-- <text wx:else class="iconfont icon-lkingboyewanyueliang" bindtap="handleSwitchReadPattern"></text> -->
       </view>
       <view class="open-catalog-btn bottom-set-item" bindtap="">

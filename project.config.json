@@ -14,7 +14,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.6.6",
 	"appid": "wx87fc79ea9b023224",
-	"projectname": "feifeiread",
+	"projectname": "feifeiread-wx-miniProcedure",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

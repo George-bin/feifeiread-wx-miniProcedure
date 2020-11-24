@@ -1,4 +1,5 @@
 let app = getApp();
+let md5 = require('../../utils/md5.js');
 // pages/my/my.js
 Page({
 
@@ -10,8 +11,7 @@ Page({
       account: '',
       password: ''
     },
-    userInfo: null,
-    loading: false
+    userInfo: null
   },
 
   /**
@@ -93,19 +93,23 @@ Page({
   },
   // 用户登录
   handleLogin (e) {
-    console.log(e)
+    // console.log(e)
     // 允许获取用户信息
     if (e.detail.errMsg === 'getUserInfo:ok') {
-      this.setData({
-        loading: true
+      wx.showLoading({
+        title: '登录中...',
       });
+      // password-md5 start
+      let form = JSON.parse(JSON.stringify(this.data.loginForm));
+      form.password = md5.hexMD5(form.password);
+      // password-md5 end
       app.getOpenid()
         .then(() => {
           wx.request({
             url: `${app.globalData.BASE_URL}/api/book/wx/login`,
             method: 'post',
             data: {
-              ...this.data.loginForm,
+              ...form,
               username: e.detail.userInfo.nickName,
               avatarUrl: e.detail.userInfo.avatarUrl
             },
@@ -116,6 +120,7 @@ Page({
               'cookie': wx.getStorageSync("sessionId")
             },
             success: (res) => {
+              wx.hideLoading();
               console.log(res);
               if (res.data.errcode === 0) {
                 wx.showToast({
@@ -123,23 +128,29 @@ Page({
                   icon: 'success',
                   duration: 2000
                 });
-                app.globalData.userInfo = res.data.userInfo;
+                wx.setStorage({
+                  key: 'user_info',
+                  data: res.data.client
+                });
+                app.globalData.userInfo = res.data.client;
+                // save account
+                wx.setStorage({
+                  key: 'account_info',
+                  data: form
+                });
                 this.setData({
-                  userInfo: res.data.userInfo,
-                  loading: false
+                  userInfo: res.data.client
                 });
               }
             },
             fail: (err) => {
               console.log(err);
+              wx.hideLoading();
               wx.showToast({
                 title: '登录失败!',
                 icon: 'none'
               })
               app.globalData.userInfo = null;
-              this.setData({
-                loading: false
-              });
             }
           })
         })

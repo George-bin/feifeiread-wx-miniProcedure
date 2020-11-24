@@ -1,0 +1,17 @@
+<!--components/Tab/Tab.wxml-->
+<view class="tab-component">
+  <view
+    wx:for="{{tabList}}"
+    wx:for-item="tab"
+    wx:key="{{tab.path}}"
+    class="tab-item"
+    data-path="{{tab.path}}"
+    bindtap="handleSwitchTab">
+    <view class="tab-item-icon">
+      <text style="color: {{tab.path === active ? '#4bb8c5' : '#333'}}" class="{{tab.icon}}"></text>
+    </view>
+    <view class="tab-item-label">
+      <text style="color: {{tab.path === active ? '#4bb8c5' : '#333'}}">{{tab.label}}</text>
+    </view>
+  </view>
+</view>

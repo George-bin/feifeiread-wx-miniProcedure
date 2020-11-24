@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "tab-item-component": "/components/TabItem/TabItem"
+  }
+}

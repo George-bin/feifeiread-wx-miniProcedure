@@ -96,7 +96,7 @@
   justify-content: center;
   align-items: center;
   height: 54px;
-  border-top: 1px solid #f7f7f7;
+  /* border-top: 1px solid #f7f7f7; */
   /* box-shadow: 0 5px 5px 5px #dfdfdf; */
 }
 
@@ -107,6 +107,7 @@
   align-items: center;
   height: 54px;
   text-align: center;
+  background: #f7f7f7;
 }
 
 .bookinfo-container .start-read-section text {

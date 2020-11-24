@@ -1,6 +1,6 @@
 <!--pages/catalog/catalog.wxml-->
 <view class="bookrack-container">
-  <view wx:if="{{!userInfo}}">尚未登录!</view>
+  <view wx:if="{{!userInfo}}" class="no-login">尚未登录!</view>
   <view wx:else class="book-list">
     <view
       wx:for="{{bookList}}"
@@ -31,4 +31,7 @@
     class="long-btp-set-bg"
     bindtap="handleCloseSetBook">
   </view>
+
+  <!-- tab栏 -->
+  <tab-component active="/pages/bookrack/bookrack"></tab-component>
 </view>

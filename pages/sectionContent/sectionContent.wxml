@@ -54,12 +54,16 @@
         <text class="iconfont icon-ai251" style="font-size: 24px;"></text>
         <text class="des">亮度</text>
       </view>
+      <!-- 白天/黑夜 -->
       <view class="read-pattern-btn bottom-set-item" bindtap="handleSwitchReadPattern">
-        <!-- wx:if="{{readPattern === 'daytime'}}" -->
-        <text wx:if="{{readPattern === 'daytime'}}" class="iconfont icon-icon_baitian" style="font-size: 24px;"></text>
-        <text wx:else class="iconfont icon-yueliang" style="font-size: 24px;"></text>
-        <text class="des">模式</text>
-        <!-- <text wx:else class="iconfont icon-lkingboyewanyueliang" bindtap="handleSwitchReadPattern"></text> -->
+        <view wx:if="{{readPattern === 'night'}}">
+          <text class="iconfont icon-icon_baitian" style="font-size: 24px;"></text>
+          <text class="des">白天</text>
+        </view>
+        <view wx:else>
+          <text class="iconfont icon-yueliang" style="font-size: 24px;"></text>
+          <text class="des">黑夜</text>
+        </view>
       </view>
       <view class="open-catalog-btn bottom-set-item" bindtap="">
         <text class="iconfont icon-danseshixintubiao-"></text>

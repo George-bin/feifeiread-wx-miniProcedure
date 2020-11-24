@@ -1,0 +1,9 @@
+<!--components/TabItem/TabItem.wxml-->
+<view class="tab-item-component" bindtap="handleSwitchTab">
+  <view class="tab-item-icon">
+    <text class="{{icon}}" style="color: {{path.indexOf(currPage)>-1 ? '#4bb8c5' : '#333'}}"></text>
+  </view>
+  <view class="tab-item-label">
+    <text style="color: {{path.indexOf(currPage)>-1 ? '#4bb8c5' : '#333'}}">{{label}}</text>
+  </view>
+</view>

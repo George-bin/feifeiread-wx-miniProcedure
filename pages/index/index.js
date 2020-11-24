@@ -11,23 +11,20 @@ Page({
     // 分类列表
     classifyList: [],
     // classify: {},
-    systemWidth: 0
+    systemWidth: 0,
+    systemHeight: 0
   },
+
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    });
-  },
   onLoad () {
     this.init();
     this.getBookList();
-    app.getBookrackInfo();
   },
 
   init () {
     this.setData({
-      systemWidth: app.globalData.windowWidth
+      systemWidth: app.globalData.windowWidth,
+      systemHeight: app.globalData.windowHeight
     });
   },
 

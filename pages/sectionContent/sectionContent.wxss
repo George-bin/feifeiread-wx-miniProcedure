@@ -47,7 +47,7 @@
   left: 0;  
   width: 100%;
   color: white;
-  background: black;
+  background: #000;
   transition: 0.3s all;
 }
 
@@ -106,7 +106,7 @@
 .catalog-section scroll-view {
   width: 70%;
   height: 100vh;
-  background: black;
+  /* background: black; */
 }
 
 .catalog-section scroll-view view {

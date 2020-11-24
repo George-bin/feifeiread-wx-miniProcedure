@@ -4,7 +4,9 @@ App({
     this.init();
     this.getSystemInfo()
   },
+  
   init: function () {
+    // 校验登录态是否过期
     wx.checkSession({
       success: (res) => {
         if (wx.getStorageSync('sessionId')) {
@@ -20,14 +22,16 @@ App({
       }
     })
   },
+  
   // 自动登录
   autoLogin () {
+    let accountInfo = wx.getStorageSync('account_info');
+    if (!accountInfo) return;
     wx.request({
       url: `${this.globalData.BASE_URL}/api/book/wx/login`,
       method: 'post',
       data: {
-        account: 'geng',
-        password: '123'
+        ...accountInfo
       },
       header: {
         // 默认值
@@ -44,8 +48,7 @@ App({
             icon: 'success',
             duration: 2000
           });
-          this.globalData.userInfo = res.data.userInfo;
-          this.getBookrackInfo();
+          this.globalData.userInfo = res.data.client;
         } else if (errcode === 991) {
           // 服务器登录态失效
           this.getOpenid()
@@ -60,6 +63,7 @@ App({
       }
     })
   },
+
   // 获取openid(登录微信服务器)
   getOpenid () {
     return new Promise((resolve, reject) => {
@@ -81,7 +85,7 @@ App({
               resolve();
             },
             fail: (err) => {
-              console.log(err)
+              console.log('获取openid失败', err)
               reject(err)
             }
           })
@@ -114,6 +118,13 @@ App({
     return new Promise((resolve, reject) => {
       wx.request({
         url: `${this.globalData.BASE_URL}/api/book/catalog/${this.globalData.activeBookInfo.bookId}?page=${this.globalData.activeCatalogPage}&limit=${this.globalData.activeCatalogLimit}`,
+        method: 'GET',
+        header: {
+          // 默认值
+          'content-type': 'application/json',
+          // 读取sessionid,当作cookie传入后台将PHPSESSID做session_id使用
+          'cookie': wx.getStorageSync("sessionId")
+        },
         success: (response) => {
           this.globalData.activeBookCatalog = response.data.catalogData;
           resolve(response)

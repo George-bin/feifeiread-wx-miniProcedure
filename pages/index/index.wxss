@@ -1,5 +1,9 @@
+.classify-list {
+  overflow: auto;
+}
+
 .classify-list .classify-list-item + .classify-list-item {
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .classify-list .classify-list-item .classify-title {
@@ -22,6 +26,7 @@
 .home-container .classify-book-list {
   display: flex;
   /* justify-content: space-between; */
+  padding-bottom: 10px;
 }
 
 .home-container .book-list-item {

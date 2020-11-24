@@ -10,8 +10,9 @@
       class="pwd-inp"
       value="{{loginForm.password}}"
       placeholder="请输入用户密码!"
-      bindinput="handleGetPassword"></input>
-    <button class="login-btn" open-type="getUserInfo" bindgetuserinfo="handleLogin" loading="{{loading}}">登录</button>
+      bindinput="handleGetPassword"
+      password></input>
+    <button class="login-btn" open-type="getUserInfo" bindgetuserinfo="handleLogin">登录</button>
   </view>
   <!-- 已登录 -->
   <view wx:else class="user-info-section">
@@ -21,4 +22,6 @@
     <view class="username">{{userInfo.username}}</view>
     <button class="logon-btn" bindtap="handleLogon">注销</button>
   </view>
+  <!-- tab栏 -->
+  <tab-component active="/pages/my/my"></tab-component>
 </view>

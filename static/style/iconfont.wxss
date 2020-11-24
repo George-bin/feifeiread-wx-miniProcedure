@@ -1,9 +1,3 @@
-.ellipsis {
-  overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
-}
-
 /* iconfont */
 @font-face {font-family: "iconfont";
   src: url('iconfont.eot?t=1580118383119'); /* IE9 */
@@ -65,4 +59,3 @@
 .icon-icon_baitian:before {
   content: "\e616";
 }
-

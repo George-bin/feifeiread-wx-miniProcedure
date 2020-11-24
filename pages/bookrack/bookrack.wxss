@@ -6,6 +6,12 @@ page {
 
 .bookrack-container {}
 
+.no-login {
+  margin-top: 10px;
+  text-align: center;
+  color: gray;
+}
+
 .bookrack-container .book-list {
   display: flex;
   flex-wrap: wrap;

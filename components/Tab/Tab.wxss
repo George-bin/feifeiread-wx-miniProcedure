@@ -1,0 +1,38 @@
+/* components/Tab/Tab.wxss */
+@import "../../static/style/iconfont.wxss";
+.tab-component {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  padding: 5px 0;
+  border-top: 1px solid #dfdfdf;
+  background: #f7f7f7;
+}
+
+.tab-component .tab-item {
+  flex: 1;
+  text-align: center;
+}
+
+.tab-item-icon text {
+  font-size: 26px;
+}
+
+.tab-item-label {
+  line-height: 12px;
+}
+
+.tab-item-label text {
+  font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+

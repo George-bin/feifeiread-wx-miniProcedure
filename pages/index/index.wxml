@@ -2,7 +2,9 @@
 <view class="home-container">
   
   <!-- 所有分类列表 start -->
-  <view class="classify-list">
+  <view
+    class="classify-list"
+    style="height: {{systemHeight - 56}}px;">
     <view
       class="classify-list-item"
       wx:for="{{classifyList}}"
@@ -42,4 +44,7 @@
     </view>
   </view>
   <!-- 所有分类列表 end -->
+
+  <!-- tab栏 -->
+  <tab-component active="/pages/index/index"></tab-component>
 </view>

@@ -14,29 +14,5 @@
     "navigationBarTitleText": "书曰读之",
     "navigationBarTextStyle": "white"
   },
-  "tabBar": {
-    "color": "#707070",
-    "selectedColor": "#4bb8c5",
-    "list": [
-      {
-        "pagePath": "pages/bookrack/bookrack",
-        "text": "书架",
-        "iconPath": "images/bookrack.png",
-        "selectedIconPath": "images/bookrack-sel.png"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home-sel.png"
-      },
-      {
-        "pagePath": "pages/my/my",
-        "text": "我的",
-        "iconPath": "images/my.png",
-        "selectedIconPath": "images/my-sel.png"
-      }
-    ]
-  },
   "sitemapLocation": "sitemap.json"
 }
